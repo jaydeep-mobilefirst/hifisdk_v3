@@ -12,6 +12,8 @@ import { ethers } from "ethers";
 const configuration = {
   environmentId: "c2c8cbaa-1aa8-4030-b258-1402ad88aa75",
   shadowDOMEnabled: false,
+  walletsFilter: (wallets: any) =>
+    wallets.filter((wallet: any) => wallet.key === "walletconnect"),
   newToWeb3WalletChainMap: {
     primary_chain: "evm",
     wallets: {
@@ -22,20 +24,11 @@ const configuration = {
 
 const ConnectWalletButtons = () => {
   const { openWallet } = useWalletItemActions();
-
+  const { setShowAuthFlow } = useDynamicContext();
   const { handleLogOut } = useDynamicContext();
 
   return (
-    <div
-      className="flex justify-center items-center"
-      style={{
-        display: "flex",
-        margin: "20px",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "20px",
-      }}
-    >
+    <div className="flex m-5 justify-center items-start gap-5">
       <button
         onClick={() => openWallet("metamask")}
         className="bg-blue-600 text-white h-8 px-4 rounded-md"
@@ -49,7 +42,7 @@ const ConnectWalletButtons = () => {
         Connect Coinbase
       </button>
       <button
-        onClick={() => openWallet("walletconnect")}
+        onClick={() => setShowAuthFlow(true)}
         className="bg-blue-600 text-white h-8 px-4 rounded-md"
       >
         Connect WalletConnect
@@ -100,16 +93,7 @@ const MyComponent = () => {
   console.log("balance", balance);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        margin: "20px",
-        justifyContent: "center",
-        alignItems: "start",
-        gap: "20px",
-      }}
-    >
+    <div className="flex flex-col m-5 justify-center items-start gap-5">
       <p>Address: {primaryWallet?.address}</p>
       <p>Balance: {balance}</p>
       <button
