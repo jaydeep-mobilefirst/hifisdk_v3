@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.wallet-button {
+  background-color: blue;
+  height: 35px;
+  width: 130px;
+  color: white;
+}
