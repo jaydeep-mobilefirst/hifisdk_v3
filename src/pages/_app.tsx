@@ -4,9 +4,10 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react";
 
-const configuration = {
+const configuration: any = {
   environmentId: "d280b168-0feb-4621-ae76-2ba6283dcdcf",
   shadowDOMEnabled: false,
+  walletConnectors: {},
   newToWeb3WalletChainMap: {
     primary_chain: "evm",
     wallets: {

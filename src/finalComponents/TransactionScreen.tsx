@@ -7,96 +7,6 @@ import coinbase from "@/components/images/coinbase.svg";
 import { useDynamicContext } from "@dynamic-labs/sdk-react";
 import { useRouter } from "next/router";
 
-interface Option {
-  label: string;
-  name: string;
-  logoUrl: string;
-}
-
-const options: Option[] = [
-  {
-    label: "eth",
-
-    logoUrl: "https://hifibridgedocs.s3.amazonaws.com/ethereum-eth-logo.png",
-
-    name: "Ethereum",
-  },
-  {
-    label: "zrx",
-
-    logoUrl: "https://hifibridgedocs.s3.amazonaws.com/0x-zrx-logo.png",
-
-    name: "0x",
-  },
-  {
-    label: "near",
-
-    logoUrl:
-      "https://hifibridgedocs.s3.amazonaws.com/near-protocol-near-logo.png",
-
-    name: "Near Protocol",
-  },
-  {
-    label: "usdc",
-
-    logoUrl: "https://hifibridgedocs.s3.amazonaws.com/Circle_USDC_Logo.svg.png",
-
-    name: "USDC Stablecoin",
-  },
-  {
-    label: "link",
-
-    logoUrl: "https://hifibridgedocs.s3.amazonaws.com/chainlink-link-logo.png",
-
-    name: "Chainlink",
-  },
-  {
-    label: "yfi",
-
-    logoUrl:
-      "https://hifibridgedocs.s3.amazonaws.com/yearn-finance-yfi-logo.png",
-
-    name: "Yearn Finance",
-  },
-  {
-    label: "bat",
-
-    logoUrl:
-      "https://hifibridgedocs.s3.amazonaws.com/1200px-Brave_Basic_Attention_Token_(BAT)_Logo.svg.png",
-
-    name: "Basic Attention Token",
-  },
-
-  {
-    label: "usdt",
-
-    logoUrl: "https://hifibridgedocs.s3.amazonaws.com/tether-usdt-logo.png",
-
-    name: "Tether Stablecoin",
-  },
-  {
-    label: "sol",
-
-    logoUrl: "https://hifibridgedocs.s3.amazonaws.com/solana-sol-logo.png",
-
-    name: "Solana",
-  },
-  {
-    label: "uni",
-    logoUrl:
-      "https://hifibridgedocs.s3.amazonaws.com/1026px-Uniswap_Logo.svg.png",
-
-    name: "Uniswap",
-  },
-  {
-    label: "sushi",
-
-    logoUrl: "https://hifibridgedocs.s3.amazonaws.com/sushiswap-sushi-logo.png",
-
-    name: "SushiSwap",
-  },
-];
-
 const customStyles = {
   option: (provided: any, state: any) => ({
     ...provided,
@@ -117,6 +27,9 @@ const TransactionScreen = ({
   allCurrency,
 }: any) => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [dropdownImage, setDropdownImage] = useState(
+    "https://hifibridgedocs.s3.amazonaws.com/ethereum-eth-logo.png"
+  );
 
   const { handleLogOut } = useDynamicContext();
   const router = useRouter();
@@ -128,6 +41,7 @@ const TransactionScreen = ({
   const handleDropdownChange = (newValue: any, actionMeta: any) => {
     const selectedValue = newValue ? newValue.code : null;
     setCurrencyName(selectedValue);
+    setDropdownImage(newValue?.logoUrl);
   };
 
   const CustomOption = (props: any) => (
@@ -139,6 +53,8 @@ const TransactionScreen = ({
         src={props.data.logoUrl}
         alt={props.data.value}
         className="w-5 h-5"
+        width={20}
+        height={20}
       />
       <span className="ml-2 uppercase text-poppins text-sm">
         {props.data.code}
@@ -157,6 +73,9 @@ const TransactionScreen = ({
 
   const handleLogOut2 = () => {
     handleLogOut();
+    setTimeout(() => {
+      router.reload();
+    }, 1000);
   };
 
   return (
@@ -165,7 +84,7 @@ const TransactionScreen = ({
         <div className="w-full flex justify-center items-center">
           <div className="flex flex-col w-full lg:w-[618px] justify-center items-center border border-[#D1D5DB] bg-white rounded-xl">
             <div className="grdiantbackground h-[89px] w-full flex justify-center items-center rounded-t-xl ">
-              <Image src={Hifi9} alt="hifi" className="h-[60px] mt-[7px]" />
+              <Image src={Hifi9} alt="hifi" className="h-[40px] mt-[10px]" />
             </div>
             <div className="flex flex-col py-4 px-6 w-full gap-4">
               <div className="flex flex-col gap-3">
@@ -173,7 +92,12 @@ const TransactionScreen = ({
                   Wallet Type
                 </p>
                 <div className="flex items-center gap-3 border border-[#D1D5DB] rounded-[4px] w-full px-4 py-3">
-                  <Image src={getImage(walletname)} alt="wallet-img" />
+                  <Image
+                    src={getImage(walletname)}
+                    alt="wallet-img"
+                    width={20}
+                    height={20}
+                  />
                   <p className="text-[#1F2937] text-poppins text-sm font-medium">
                     {walletname}
                   </p>
@@ -196,25 +120,35 @@ const TransactionScreen = ({
 
                 <div className="flex flex-col lg:flex-row items-center gap-3">
                   <div className="relative w-full lg:w-[50%]">
-                    <Select
-                      components={{ Option: CustomOption }}
-                      onChange={handleDropdownChange}
-                      className="basic-single uppercase text-poppins text-sm"
-                      classNamePrefix="select"
-                      defaultValue={allCurrency[6]}
-                      isDisabled={false}
-                      isLoading={false}
-                      isClearable={true}
-                      isRtl={false}
-                      isSearchable={true}
-                      name="code"
-                      options={allCurrency}
-                      styles={customStyles}
-                      getOptionLabel={(option) => option.code}
-                    />
+                    <div className="relative">
+                      <Select
+                        components={{ Option: CustomOption }}
+                        onChange={handleDropdownChange}
+                        className="basic-single uppercase text-poppins text-sm"
+                        classNamePrefix="select"
+                        defaultValue={allCurrency[6]}
+                        isDisabled={false}
+                        isLoading={false}
+                        isClearable={true}
+                        isRtl={false}
+                        isSearchable={true}
+                        name="code"
+                        options={allCurrency}
+                        styles={customStyles}
+                        getOptionLabel={(option) => option.code}
+                      />
 
-                    <div className="absolute cursor-pointer top-[15px] left-2">
-                      {/* <Image src={coinbasewallet} alt="arrow" className="" /> */}
+                      {dropdownImage && (
+                        <div className="absolute cursor-pointer top-[15px] left-2">
+                          <Image
+                            src={dropdownImage}
+                            width={20}
+                            height={20}
+                            alt=""
+                            className=""
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center gap-3 border border-[#D1D5DB] rounded-[4px] px-4 py-3  w-full lg:w-[50%] h-[51px]">
