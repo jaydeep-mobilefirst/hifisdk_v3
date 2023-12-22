@@ -8,3 +8,73 @@
   width: 130px;
   color: white;
 }
+
+.text-poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: darkgray lightgray;
+}
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: lightgray;
+}
+
+.grdiantbackground {
+  background: linear-gradient(
+    180deg,
+    #6200ee 0%,
+    #8b37fb 99.98%,
+    #8b37fb 99.99%,
+    #9747ff 100%
+  );
+}
+
+.css-13cymwt-control {
+  min-height: 51px !important;
+  border-color: #d1d5db !important;
+}
+
+/* .css-1dimb5e-singleValue {
+  grid-area: 1/1/2/3;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: hsl(0, 0%, 20%);
+  margin-left: 16px !important;
+  margin-right: 2px;
+  box-sizing: border-box;
+} */
+
+.css-qbdosj-Input,
+.select__input-container,
+.select__value-container,
+.select__single-value,
+.select__placeholder {
+  padding-left: 16px !important;
+}
+
+.select__input-container {
+  height: 43px !important;
+}
+
+.portal__backdrop {
+  background: transparent !important;
+  cursor: default;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
