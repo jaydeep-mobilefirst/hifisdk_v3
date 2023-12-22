@@ -7,7 +7,6 @@ import { DynamicContextProvider } from "@dynamic-labs/sdk-react";
 const configuration = {
   environmentId: "d280b168-0feb-4621-ae76-2ba6283dcdcf",
   shadowDOMEnabled: false,
-  walletConnectors: {},
   newToWeb3WalletChainMap: {
     primary_chain: "evm",
     wallets: {
@@ -22,11 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Hifi Pay</title>
       </Head>
-
-      <DynamicContextProvider
-        // @ts-ignore
-        settings={configuration}
-      >
+      <DynamicContextProvider settings={configuration}>
         <Component {...pageProps} />
       </DynamicContextProvider>
     </>
