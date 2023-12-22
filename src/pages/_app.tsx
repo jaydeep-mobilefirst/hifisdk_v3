@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react";
 
-const configuration: any = {
+const configuration = {
   environmentId: "d280b168-0feb-4621-ae76-2ba6283dcdcf",
   shadowDOMEnabled: false,
   walletConnectors: {},
@@ -22,7 +22,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Hifi Pay</title>
       </Head>
-      <DynamicContextProvider settings={configuration}>
+
+      <DynamicContextProvider
+        // @ts-ignore
+        settings={configuration}
+      >
         <Component {...pageProps} />
       </DynamicContextProvider>
     </>
