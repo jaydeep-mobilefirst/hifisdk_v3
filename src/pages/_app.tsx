@@ -6,7 +6,7 @@ import { DynamicContextProvider } from "@dynamic-labs/sdk-react";
 
 const configuration = {
   environmentId: "d280b168-0feb-4621-ae76-2ba6283dcdcf",
-  // shadowDOMEnabled: false,
+  shadowDOMEnabled: false,
   // newToWeb3WalletChainMap: {
   //   primary_chain: "evm",
   //   wallets: {
