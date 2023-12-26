@@ -38,8 +38,6 @@ export default function Home() {
     handleLogOut,
   } = useDynamicContext();
 
-  console.log(primaryWallet)
-
   const router = useRouter();
   useEffect(() => {
     // Function to parse search parameters from URL
@@ -65,7 +63,9 @@ export default function Home() {
 
   useEffect(() => {
     if (!primaryWallet) {
-      setShowAuthFlow(true);
+      setTimeout(() => {
+        setShowAuthFlow(true);
+      }, 1000);
     }
     primaryWallet?.connector.getBalance().then(function (result: any) {
       setWalletbalance(result);
