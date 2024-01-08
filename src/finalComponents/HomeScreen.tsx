@@ -6,20 +6,9 @@ const HomeScreen = ({ connect }: any) => {
   const { showAuthFlow } = useDynamicContext();
   return (
     <>
-     
-      {showAuthFlow ? (
-        <>
-          <div className={`${showAuthFlow ? "hidden" : "hidden"}`}>
-            <DynamicWidget />
-          </div>
-        </>
-      ) : (
-        <>
-          <div>
-            <FirstLoader />
-          </div>
-        </>
-      )}
+      <div className={`hidden`}>
+        <DynamicWidget />
+      </div>
     </>
   );
 };

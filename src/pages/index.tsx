@@ -63,9 +63,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!primaryWallet) {
-      setTimeout(() => {
-        setShowAuthFlow(true);
-      }, 1000);
+      setShowAuthFlow(true);
     }
     primaryWallet?.connector.getBalance().then(function (result: any) {
       setWalletbalance(result);
