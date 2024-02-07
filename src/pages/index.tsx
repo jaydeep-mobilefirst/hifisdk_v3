@@ -130,7 +130,7 @@ export default function Home() {
         const signer: any = await primaryWallet.connector.getSigner();
 
         const transaction = {
-          to: "0xbC1E64328582FEE794052679fD13b4B84b6DB9E9",
+          to: merchantWallet,
           value: ethers.utils.parseEther(`${currencyValue}`),
           // data: "0x0",
         };
